@@ -1,0 +1,17 @@
+stages:
+  ingest:
+    cmd: python -m src.ingest
+    deps:
+      - data/raw/ratings.csv
+      - src/ingest.py
+      - src/config.py
+    outs:
+      - data/processed/ratings_clean.csv
+
+  features:
+    cmd: python -m src.features
+    deps:
+      - data/processed/ratings_clean.csv
+      - src/features.py
+    outs:
+      - models/user_similarity.pkl
